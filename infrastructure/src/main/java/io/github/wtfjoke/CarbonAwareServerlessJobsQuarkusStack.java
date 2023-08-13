@@ -1,24 +1,30 @@
 package io.github.wtfjoke;
 
+import java.util.Map;
+
+import io.github.wtfjoke.carbonawarecomputing.CarbonAwareComputingServerlessJobsConstruct;
+import io.github.wtfjoke.carbonawarecomputing.CarbonAwareComputingServerlessJobsConstructProps;
+import software.amazon.awscdk.services.ssm.SecureStringParameterAttributes;
+import software.amazon.awscdk.services.ssm.StringParameter;
+import software.amazon.awscdk.services.stepfunctions.Pass;
+import software.amazon.awscdk.services.stepfunctions.Result;
 import software.constructs.Construct;
 import software.amazon.awscdk.Stack;
 import software.amazon.awscdk.StackProps;
-// import software.amazon.awscdk.Duration;
-// import software.amazon.awscdk.services.sqs.Queue;
 
 public class CarbonAwareServerlessJobsQuarkusStack extends Stack {
-    public CarbonAwareServerlessJobsQuarkusStack(final Construct scope, final String id) {
-        this(scope, id, null);
-    }
 
-    public CarbonAwareServerlessJobsQuarkusStack(final Construct scope, final String id, final StackProps props) {
-        super(scope, id, props);
+	public CarbonAwareServerlessJobsQuarkusStack(final Construct scope, final String id, final StackProps props) {
+		super(scope, id, props);
 
-        // The code that defines your stack goes here
+		var fakeLongRunningBatchJob = Pass.Builder.create(this, "My long running batch job")
+				.comment("This is my long running batch job").inputPath("$.batchJobInput")
+				.result(Result.fromObject(Map.of("success", true))).build();
 
-        // example resource
-        // final Queue queue = Queue.Builder.create(this, "InfrastructureQueue")
-        //         .visibilityTimeout(Duration.seconds(300))
-        //         .build();
-    }
+		var carbonAwareComputingApiKey = StringParameter.fromSecureStringParameterAttributes(this, "CarbonAwareComputingApiKeyString",
+				SecureStringParameterAttributes.builder().parameterName("/carbon-aware-computing/api-key").build());
+
+		new CarbonAwareComputingServerlessJobsConstruct(this, "Computing",
+				new CarbonAwareComputingServerlessJobsConstructProps(carbonAwareComputingApiKey, fakeLongRunningBatchJob, true));
+	}
 }
