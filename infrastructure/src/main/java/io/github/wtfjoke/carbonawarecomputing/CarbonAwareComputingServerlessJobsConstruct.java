@@ -24,7 +24,7 @@ public class CarbonAwareComputingServerlessJobsConstruct extends Construct {
 		String QUARKUS_LAMBDA_HANDLER = "io.quarkus.amazon.lambda.runtime.QuarkusStreamHandler::handleRequest";
 
 		if (props.useNativeImage()) {
-			return Function.Builder.create(this, "GetBestRenewableEnergyTimeWindowNativeLambda")
+			return Function.Builder.create(this, "GetBestRenewableEnergyTimeWindowLambda")
 					.description("Native - Get the best time window to run a job based on the carbon intensity of the grid using the API of https://www.carbon-aware-computing.com/.")
 					.runtime(Runtime.PROVIDED) // Taken from ../lambda/build/manage.sh
 					.code(Code.fromAsset("../lambda/build/function.zip"))
