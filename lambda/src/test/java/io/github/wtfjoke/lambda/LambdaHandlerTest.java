@@ -1,5 +1,6 @@
 package io.github.wtfjoke.lambda;
 
+import io.github.wtfjoke.lambda.carbon.aware.computing.Country;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -17,7 +18,7 @@ public class LambdaHandlerTest {
         // you test your lambdas by invoking on http://localhost:8081
         // this works in dev mode too
 
-        CarbonAwareTimeWindowPayload in = new CarbonAwareTimeWindowPayload(Location.de, ZonedDateTime.now());
+        CarbonAwareTimeWindowPayload in = new CarbonAwareTimeWindowPayload(Country.de, ZonedDateTime.now());
         given()
                 .contentType("application/json")
                 .accept("application/json")
