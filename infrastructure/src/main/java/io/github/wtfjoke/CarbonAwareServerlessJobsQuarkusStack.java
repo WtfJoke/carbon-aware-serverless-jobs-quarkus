@@ -25,6 +25,6 @@ public class CarbonAwareServerlessJobsQuarkusStack extends Stack {
 				SecureStringParameterAttributes.builder().parameterName("/carbon-aware-computing/api-key").build());
 
 		new CarbonAwareComputingServerlessJobsConstruct(this, "Computing",
-				new CarbonAwareComputingServerlessJobsConstructProps(carbonAwareComputingApiKey, fakeLongRunningBatchJob, true));
+				new CarbonAwareComputingServerlessJobsConstructProps(carbonAwareComputingApiKey, fakeLongRunningBatchJob, false));
 	}
 }
