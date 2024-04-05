@@ -49,7 +49,7 @@ If you want to learn more about building native executables, please consult http
 
 ## Related Guides
 
-- AWS Lambda ([guide](https://quarkus.io/guides/amazon-lambda)): Write AWS Lambda functions
+- AWS Lambda ([guide](https://quarkus.io/guides/aws-lambda)): Write AWS Lambda functions
 
 ## Provided Code
 
@@ -57,7 +57,7 @@ If you want to learn more about building native executables, please consult http
 
 This example contains a Quarkus Greeting Lambda ready for Amazon.
 
-[Related guide section...](https://quarkus.io/guides/amazon-lambda)
+[Related guide section...](https://quarkus.io/guides/aws-lambda)
 
 > :warning: **INCOMPATIBLE WITH DEV MODE**: Amazon Lambda Binding is not compatible with dev mode yet!
 

@@ -16,7 +16,7 @@ public class CarbonAwareComputingServerlessJobsConstruct extends Construct {
 	public CarbonAwareComputingServerlessJobsConstruct(@NotNull Construct scope, @NotNull String id, CarbonAwareComputingServerlessJobsConstructProps props) {
 		super(scope, id);
 
-		// Quarkus handler Must be hardcoded to this string, See https://quarkus.io/guides/amazon-lambda
+		// Quarkus handler Must be hardcoded to this string, See https://quarkus.io/guides/aws-lambda
 		Function getBestRenewableEnergyTimeWindowLambda = createBestRenewableEnergyTimeWindowLambda(props);
 	}
 
@@ -34,7 +34,7 @@ public class CarbonAwareComputingServerlessJobsConstruct extends Construct {
 					.architecture(Architecture.X86_64)
 					.logRetention(RetentionDays.ONE_MONTH)
 					.environment(Map.of(
-							"DISABLE_SIGNAL_HANDLERS", "true", // See https://quarkus.io/guides/amazon-lambda#deploy-to-aws-lambda-custom-native-runtime
+							"DISABLE_SIGNAL_HANDLERS", "true", // See https://quarkus.io/guides/aws-lambda#deploy-to-aws-lambda-custom-native-runtime
 							"CARBON_AWARE_COMPUTING_API_KEY", props.apiKey().getParameterName()
 					))
 					.build();
