@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
 
+import java.time.ZonedDateTime;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.containsString;
 
@@ -15,8 +17,7 @@ public class LambdaHandlerTest {
         // you test your lambdas by invoking on http://localhost:8081
         // this works in dev mode too
 
-        Person in = new Person();
-        in.setName("Stu");
+        CarbonAwareTimeWindowPayload in = new CarbonAwareTimeWindowPayload(Location.de, ZonedDateTime.now());
         given()
                 .contentType("application/json")
                 .accept("application/json")
@@ -25,7 +26,7 @@ public class LambdaHandlerTest {
                 .post()
                 .then()
                 .statusCode(200)
-                .body(containsString("Hello Stu"));
+                .body(containsString("10"));
     }
 
 }
