@@ -28,9 +28,10 @@ public class Client {
 				.build();
 
 		try (var client = HttpClient.newHttpClient()) {
+			System.out.println("Fetching forecast from: " + request.uri());
 			var response = client.send(request, HttpResponse.BodyHandlers.ofString());
 			if (response.statusCode() != 200) {
-				throw new Exception("Failed to fetch forecast: " + response.body());
+				throw new Exception("Failed to fetch forecast: " + response.body() + " (" + response.statusCode() + ")");
 			}
 			return new ObjectMapper().readValue(response.body(), ForecastResponse[].class);
 		}
