@@ -4,7 +4,7 @@ import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @RegisterForReflection
 public record ForecastResponse(
-		String location,
+		Location location,
 		Integer windowSize,
 		ForecastOptimalDataPoint[] optimalDataPoints
 ) { }

@@ -6,9 +6,9 @@ import java.util.Optional;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @RegisterForReflection
-public record ForecastQueryParameters(Country location, ZonedDateTime dataStartAt, ZonedDateTime dataEndAt, Integer windowSize) {
+public record ForecastQueryParameters(Location location, ZonedDateTime dataStartAt, ZonedDateTime dataEndAt, Integer windowSize) {
 
-	public ForecastQueryParameters(Country location, ZonedDateTime dataStartAt, ZonedDateTime dataEndAt) {
+	public ForecastQueryParameters(Location location, ZonedDateTime dataStartAt, ZonedDateTime dataEndAt) {
 		this(location, dataStartAt, dataEndAt, null);
 	}
 

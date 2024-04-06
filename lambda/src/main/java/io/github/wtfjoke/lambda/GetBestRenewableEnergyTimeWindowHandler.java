@@ -20,7 +20,7 @@ public class GetBestRenewableEnergyTimeWindowHandler implements RequestHandler<C
 		var startDate = input.earliestDateTime();
 		var latestStartDate = startDate.plusMinutes(input.latestStartInMinutes());
 
-		var forecastQueryParameters = new ForecastQueryParameters(input.country(), startDate, latestStartDate);
+		var forecastQueryParameters = new ForecastQueryParameters(input.location(), startDate, latestStartDate);
 		try {
 			ZonedDateTime optimalExecutionDateTime = carbonAwareComputingClient.extractOptimalTime(carbonAwareComputingClient.fetchForecast(forecastQueryParameters));
 			long waitTimeInSeconds = getWaitTimeInSeconds(optimalExecutionDateTime);
