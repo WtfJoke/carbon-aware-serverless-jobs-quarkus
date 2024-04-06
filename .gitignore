@@ -6,3 +6,4 @@ build
 
 # IntelliJ
 .idea
+/.quarkus/cli/plugins/quarkus-cli-catalog.json
