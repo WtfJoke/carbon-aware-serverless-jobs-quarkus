@@ -16,9 +16,4 @@ public record ForecastQueryParameters(
 	public ForecastQueryParameters(Location location, ZonedDateTime dataStartAt, ZonedDateTime dataEndAt) {
 		this(location, dataStartAt, dataEndAt, null);
 	}
-
-	String asQueryParameters() {
-		return "location=" + location + "&dataStartAt=" + dataStartAt + "&dataEndAt=" + dataEndAt + Optional.ofNullable(windowSize)
-				.map(ws -> "&windowSize=" + ws).orElse("");
-	}
 }
