@@ -19,6 +19,11 @@ The application can be packaged using:
 ```shell script
 ../gradlew build
 ```
+or
+```shell
+quarkus build
+```
+
 It produces the `quarkus-run.jar` file in the `build/quarkus-app/` directory.
 Be aware that it’s not an _über-jar_ as the dependencies are copied into the `build/quarkus-app/lib/` directory.
 
@@ -37,10 +42,23 @@ You can create a native executable using:
 ```shell script
 ../gradlew build -Dquarkus.package.type=native
 ```
+or
+```shell
+quarkus build --native
+```
+
 
 Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
 ```shell script
 ../gradlew build -Dquarkus.package.type=native -Dquarkus.native.container-build=true
+```
+or
+```shell
+quarkus build --native -Dquarkus.native.container-build=true
+```
+or without tests
+```shell
+quarkus build --native --no-tests -Dquarkus.native.container-build=true
 ```
 
 You can then execute your native executable with: `./build/lambda-1.0.0-SNAPSHOT-runner`
