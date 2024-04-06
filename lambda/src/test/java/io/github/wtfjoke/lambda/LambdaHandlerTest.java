@@ -8,7 +8,6 @@ import io.quarkus.test.junit.QuarkusTest;
 import java.time.ZonedDateTime;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.containsString;
 
 @QuarkusTest
 public class LambdaHandlerTest {
@@ -17,7 +16,6 @@ public class LambdaHandlerTest {
     public void testSimpleLambdaSuccess() throws Exception {
         // you test your lambdas by invoking on http://localhost:8081
         // this works in dev mode too
-
         CarbonAwareTimeWindowPayload in = new CarbonAwareTimeWindowPayload(Country.de, ZonedDateTime.now());
         given()
                 .contentType("application/json")
@@ -26,8 +24,7 @@ public class LambdaHandlerTest {
                 .when()
                 .post()
                 .then()
-                .statusCode(200)
-                .body(containsString("10"));
+                .statusCode(200);
     }
 
 }

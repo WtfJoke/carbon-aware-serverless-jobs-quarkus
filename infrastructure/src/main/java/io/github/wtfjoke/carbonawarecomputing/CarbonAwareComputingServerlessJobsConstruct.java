@@ -1,5 +1,7 @@
 package io.github.wtfjoke.carbonawarecomputing;
 
+import software.amazon.awscdk.Duration;
+
 import java.util.Map;
 
 import org.jetbrains.annotations.NotNull;
@@ -9,6 +11,9 @@ import software.amazon.awscdk.services.lambda.Function;
 import software.amazon.awscdk.services.lambda.Runtime;
 import software.amazon.awscdk.services.lambda.Tracing;
 import software.amazon.awscdk.services.logs.RetentionDays;
+import software.amazon.awscdk.services.ssm.IStringParameter;
+import software.amazon.awscdk.services.ssm.SecureStringParameterAttributes;
+import software.amazon.awscdk.services.ssm.StringParameter;
 import software.constructs.Construct;
 
 public class CarbonAwareComputingServerlessJobsConstruct extends Construct {
@@ -18,6 +23,11 @@ public class CarbonAwareComputingServerlessJobsConstruct extends Construct {
 
 		// Quarkus handler Must be hardcoded to this string, See https://quarkus.io/guides/aws-lambda
 		Function getBestRenewableEnergyTimeWindowLambda = createBestRenewableEnergyTimeWindowLambda(props);
+		IStringParameter apiKey = StringParameter.fromSecureStringParameterAttributes(this, "CarbonAwareComputingApiKeyString",
+				SecureStringParameterAttributes.builder()
+				.parameterName("/carbon-aware-computing/api-key").build());
+		apiKey.grantRead(getBestRenewableEnergyTimeWindowLambda);
+
 	}
 
 	private Function createBestRenewableEnergyTimeWindowLambda(CarbonAwareComputingServerlessJobsConstructProps props) {
@@ -32,10 +42,10 @@ public class CarbonAwareComputingServerlessJobsConstruct extends Construct {
 					.tracing(Tracing.ACTIVE)
 					.memorySize(512)
 					.architecture(Architecture.X86_64)
+					.timeout(Duration.seconds(30))
 					.logRetention(RetentionDays.ONE_MONTH)
 					.environment(Map.of(
-							"DISABLE_SIGNAL_HANDLERS", "true", // See https://quarkus.io/guides/aws-lambda#deploy-to-aws-lambda-custom-native-runtime
-							"CARBON_AWARE_COMPUTING_API_KEY", props.apiKey().getParameterName()
+							"DISABLE_SIGNAL_HANDLERS", "true" // See https://quarkus.io/guides/aws-lambda#deploy-to-aws-lambda-custom-native-runtime
 					))
 					.build();
 		}
@@ -48,10 +58,8 @@ public class CarbonAwareComputingServerlessJobsConstruct extends Construct {
 					.tracing(Tracing.ACTIVE)
 					.memorySize(512)
 					.architecture(Architecture.ARM_64)
+					.timeout(Duration.seconds(30))
 					.logRetention(RetentionDays.ONE_MONTH)
-					.environment(Map.of(
-							"CARBON_AWARE_COMPUTING_API_KEY", props.apiKey().getParameterName()
-					))
 					.build();
 		}
 	}

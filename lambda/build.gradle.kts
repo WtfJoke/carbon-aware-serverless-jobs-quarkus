@@ -14,11 +14,15 @@ val quarkusPlatformVersion: String by project
 
 dependencies {
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
+    implementation(enforcedPlatform("${quarkusPlatformGroupId}:quarkus-amazon-services-bom:${quarkusPlatformVersion}"))
     implementation("io.quarkus:quarkus-amazon-lambda")
-    implementation("io.quarkus:quarkus-arc")
+    implementation("io.quarkus:quarkus-jackson")
+    implementation("io.quarkiverse.amazonservices:quarkus-amazon-ssm")
+    implementation("software.amazon.awssdk:url-connection-client")
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
 }
+
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
