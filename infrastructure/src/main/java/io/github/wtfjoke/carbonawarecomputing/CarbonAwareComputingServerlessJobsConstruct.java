@@ -52,7 +52,7 @@ public class CarbonAwareComputingServerlessJobsConstruct extends Construct {
 		else {
 			return Function.Builder.create(this, "GetBestRenewableEnergyTimeWindowLambda")
 					.description("Get the best time window to run a job based on the carbon intensity of the grid using the API of https://www.carbon-aware-computing.com/.")
-					.runtime(Runtime.JAVA_17)
+					.runtime(Runtime.JAVA_21)
 					.code(Code.fromAsset("../lambda/build/function.zip"))
 					.handler(QUARKUS_LAMBDA_HANDLER)
 					.tracing(Tracing.ACTIVE)

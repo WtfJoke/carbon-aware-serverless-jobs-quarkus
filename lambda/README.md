@@ -50,6 +50,7 @@ If you want to learn more about building native executables, please consult http
 ## Related Guides
 
 - AWS Lambda ([guide](https://quarkus.io/guides/aws-lambda)): Write AWS Lambda functions
+- REST Client ([guide](https://quarkus.io/guides/rest-client)): Call REST services
 
 ## Provided Code
 

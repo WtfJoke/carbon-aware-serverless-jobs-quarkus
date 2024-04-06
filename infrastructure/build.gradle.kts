@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    api("software.amazon.awscdk:aws-cdk-lib:2.91.0")
+    api("software.amazon.awscdk:aws-cdk-lib:2.136.0")
     api("software.constructs:constructs:[10.0.0,11.0.0)")
     implementation(project(":lambda")) // Dependency to lambda project
     testImplementation("org.junit.jupiter:junit-jupiter:5.7.1")
@@ -24,8 +24,8 @@ dependencies {
 
 description = "infrastructure"
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
 }
 
 publishing {
