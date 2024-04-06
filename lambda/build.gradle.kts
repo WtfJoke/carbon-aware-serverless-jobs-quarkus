@@ -19,6 +19,8 @@ dependencies {
     implementation("io.quarkus:quarkus-jackson")
     implementation("io.quarkiverse.amazonservices:quarkus-amazon-ssm")
     implementation("software.amazon.awssdk:url-connection-client")
+    implementation("io.quarkus:quarkus-rest-client-jackson")
+    implementation("io.quarkus:quarkus-rest-client")
     testImplementation("io.quarkus:quarkus-junit5")
     testImplementation("io.rest-assured:rest-assured")
 }
