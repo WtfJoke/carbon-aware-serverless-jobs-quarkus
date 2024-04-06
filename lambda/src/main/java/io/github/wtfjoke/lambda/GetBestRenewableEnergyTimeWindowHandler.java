@@ -10,7 +10,7 @@ import java.time.ZonedDateTime;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
 
-public class GetBestRenewableEnergyTimeWindow implements RequestHandler<CarbonAwareTimeWindowPayload, CarbonAwareTimeWindowResponse> {
+public class GetBestRenewableEnergyTimeWindowHandler implements RequestHandler<CarbonAwareTimeWindowPayload, CarbonAwareTimeWindowResponse> {
 
 	@Inject
 	CarbonAwareComputingClient carbonAwareComputingClient;
