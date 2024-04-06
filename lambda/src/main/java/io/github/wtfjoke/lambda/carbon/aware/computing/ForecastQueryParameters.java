@@ -6,13 +6,19 @@ import java.util.Optional;
 import io.quarkus.runtime.annotations.RegisterForReflection;
 
 @RegisterForReflection
-public record ForecastQueryParameters(Location location, ZonedDateTime dataStartAt, ZonedDateTime dataEndAt, Integer windowSize) {
+public record ForecastQueryParameters(
+		Location location,
+		ZonedDateTime dataStartAt,
+		ZonedDateTime dataEndAt,
+		Integer windowSize
+) {
 
 	public ForecastQueryParameters(Location location, ZonedDateTime dataStartAt, ZonedDateTime dataEndAt) {
 		this(location, dataStartAt, dataEndAt, null);
 	}
 
 	String asQueryParameters() {
-		return "location=" + location + "&dataStartAt=" + dataStartAt + "&dataEndAt=" + dataEndAt  + Optional.ofNullable(windowSize).map(ws -> "&windowSize=" + ws).orElse("");
+		return "location=" + location + "&dataStartAt=" + dataStartAt + "&dataEndAt=" + dataEndAt + Optional.ofNullable(windowSize)
+				.map(ws -> "&windowSize=" + ws).orElse("");
 	}
 }
