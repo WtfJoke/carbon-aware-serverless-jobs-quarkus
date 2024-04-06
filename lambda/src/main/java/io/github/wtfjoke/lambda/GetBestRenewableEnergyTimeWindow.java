@@ -4,13 +4,16 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import io.github.wtfjoke.lambda.carbon.aware.computing.Client;
 import io.github.wtfjoke.lambda.carbon.aware.computing.ForecastQueryParameters;
+import jakarta.inject.Inject;
 
 import java.time.ZonedDateTime;
-import java.util.Arrays;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
 
 public class GetBestRenewableEnergyTimeWindow implements RequestHandler<CarbonAwareTimeWindowPayload, CarbonAwareTimeWindowResponse> {
+
+	@Inject
+	Client client;
 
 	@Override
 	public CarbonAwareTimeWindowResponse handleRequest(CarbonAwareTimeWindowPayload input, Context context) {
@@ -18,7 +21,6 @@ public class GetBestRenewableEnergyTimeWindow implements RequestHandler<CarbonAw
 		var latestStartDate = startDate.plusMinutes(input.latestStartInMinutes());
 
 		var forecastQueryParameters = new ForecastQueryParameters(input.country(), startDate, latestStartDate);
-		var client = new Client();
 		try {
 			ZonedDateTime optimalExecutionDateTime = client.extractOptimalTime(client.fetchForecast(forecastQueryParameters));
 			long waitTimeInSeconds = getWaitTimeInSeconds(optimalExecutionDateTime);

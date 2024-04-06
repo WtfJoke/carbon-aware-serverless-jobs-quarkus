@@ -9,15 +9,21 @@ import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 import software.amazon.awssdk.services.ssm.SsmClient;
 import software.amazon.awssdk.services.ssm.model.GetParameterRequest;
 import software.amazon.awssdk.services.ssm.model.ParameterNotFoundException;
 
 import static java.time.temporal.ChronoUnit.SECONDS;
 
+@ApplicationScoped
 public class Client {
 	private static final String BASE_API_URL = "https://forecast.carbon-aware-computing.com";
 	private static final String API_KEY_PARAMETER_NAME = "/carbon-aware-computing/api-key";
+
+	@Inject
+	SsmClient ssmClient;
 
 	public ForecastResponse[] fetchForecast(ForecastQueryParameters queryParameters) throws Exception {
 		var request = HttpRequest.newBuilder()
@@ -70,7 +76,7 @@ public class Client {
 				.withDecryption(true)
 				.build();
 
-		try (var ssmClient = SsmClient.create()) {
+		try {
 			var response = ssmClient.getParameter(request);
 			return Optional.of(response.parameter().value());
 		}
