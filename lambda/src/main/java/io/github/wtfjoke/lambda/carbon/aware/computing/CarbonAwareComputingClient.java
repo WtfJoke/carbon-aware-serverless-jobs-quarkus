@@ -18,7 +18,7 @@ import software.amazon.awssdk.services.ssm.model.ParameterNotFoundException;
 import static java.time.temporal.ChronoUnit.SECONDS;
 
 @ApplicationScoped
-public class Client {
+public class CarbonAwareComputingClient {
 	private static final String BASE_API_URL = "https://forecast.carbon-aware-computing.com";
 	private static final String API_KEY_PARAMETER_NAME = "/carbon-aware-computing/api-key";
 

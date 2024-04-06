@@ -2,7 +2,7 @@ package io.github.wtfjoke.lambda;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import io.github.wtfjoke.lambda.carbon.aware.computing.Client;
+import io.github.wtfjoke.lambda.carbon.aware.computing.CarbonAwareComputingClient;
 import io.github.wtfjoke.lambda.carbon.aware.computing.ForecastQueryParameters;
 import jakarta.inject.Inject;
 
@@ -13,7 +13,7 @@ import static java.time.temporal.ChronoUnit.SECONDS;
 public class GetBestRenewableEnergyTimeWindow implements RequestHandler<CarbonAwareTimeWindowPayload, CarbonAwareTimeWindowResponse> {
 
 	@Inject
-	Client client;
+	CarbonAwareComputingClient carbonAwareComputingClient;
 
 	@Override
 	public CarbonAwareTimeWindowResponse handleRequest(CarbonAwareTimeWindowPayload input, Context context) {
@@ -22,7 +22,7 @@ public class GetBestRenewableEnergyTimeWindow implements RequestHandler<CarbonAw
 
 		var forecastQueryParameters = new ForecastQueryParameters(input.country(), startDate, latestStartDate);
 		try {
-			ZonedDateTime optimalExecutionDateTime = client.extractOptimalTime(client.fetchForecast(forecastQueryParameters));
+			ZonedDateTime optimalExecutionDateTime = carbonAwareComputingClient.extractOptimalTime(carbonAwareComputingClient.fetchForecast(forecastQueryParameters));
 			long waitTimeInSeconds = getWaitTimeInSeconds(optimalExecutionDateTime);
 
 			System.out.println("Optimal execution time: " + optimalExecutionDateTime);
