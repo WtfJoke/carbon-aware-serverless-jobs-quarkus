@@ -22,9 +22,13 @@ public class CarbonAwareServerlessJobsQuarkusStack extends Stack {
 				.result(Result.fromObject(Map.of("success", true))).build();
 
 		var carbonAwareComputingApiKey = StringParameter.fromSecureStringParameterAttributes(this, "CarbonAwareComputingApiKeyString",
-				SecureStringParameterAttributes.builder().parameterName("/carbon-aware-computing/api-key").build());
+				SecureStringParameterAttributes
+						.builder()
+						.parameterName("/carbon-aware-computing/api-key")
+						.build()
+		);
 
 		new CarbonAwareComputingServerlessJobsConstruct(this, "Computing",
-				new CarbonAwareComputingServerlessJobsConstructProps(carbonAwareComputingApiKey, fakeLongRunningBatchJob, false));
+				new CarbonAwareComputingServerlessJobsConstructProps(carbonAwareComputingApiKey, fakeLongRunningBatchJob, true));
 	}
 }
