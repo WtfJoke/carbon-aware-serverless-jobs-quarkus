@@ -44,7 +44,7 @@ public class CarbonAwareComputingServerlessJobsConstruct extends Construct {
 		if (props.useNativeImage()) {
 			return functionBuilder
 					.description("Native - Get the best time window to run a job based on the carbon intensity of the grid using the API of https://www.carbon-aware-computing.com/.")
-					.runtime(Runtime.PROVIDED) // Taken from ../lambda/build/manage.sh
+					.runtime(Runtime.PROVIDED_AL2023)
 					.environment(Map.of(
 							"DISABLE_SIGNAL_HANDLERS", "true" // See https://quarkus.io/guides/aws-lambda#deploy-to-aws-lambda-custom-native-runtime
 					))
